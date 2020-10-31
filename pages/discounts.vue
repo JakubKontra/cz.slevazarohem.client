@@ -9,8 +9,8 @@
 <script>
 export default {
   components: {},
-  fetch({ store, params }) {
-    store.dispatch('discounts/getAllDiscounts')
+  created() {
+    this.$store.dispatch('discounts/getAllDiscounts')
   }
 }
 </script>

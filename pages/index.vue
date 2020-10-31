@@ -2,6 +2,7 @@
   <div>
     Hello world
 
+  <nuxt-link to="/discounts">Discounts map</nuxt-link>
 
     <GmapMap
       :center="{lat:10, lng:10}"

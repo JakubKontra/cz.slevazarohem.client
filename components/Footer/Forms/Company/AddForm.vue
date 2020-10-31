@@ -228,7 +228,9 @@ export default {
       }
     }
   },
-  created() {},
+  created() {
+    this.$store.dispatch('files/getAllFiles')
+  },
   computed: {
     newPrice() {
       return parseInt(this.form.discount.price * this.form.discount.percentage)

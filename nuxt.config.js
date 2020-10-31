@@ -69,6 +69,10 @@ module.exports = {
     {
       src: '@/plugins/nuxt-client-init.js',
       ssr: false
+    },
+    {
+      src: "@/plugins/google-maps",
+      ssr: true
     }
   ],
 
@@ -111,6 +115,9 @@ module.exports = {
         }
       }
     },
+
+    transpile: [/^vue2-google-maps($|\/)/],
+
     /*
     ** You can extend webpack config here
     */

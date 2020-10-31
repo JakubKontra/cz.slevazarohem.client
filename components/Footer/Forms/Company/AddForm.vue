@@ -122,6 +122,7 @@
         <input id="form-discount_due" v-model="form.discount.due_date" type="text" name="discount_due">
       </label>
 
+<input type="submit" value="Save" @click.prevent="onFormSubmit()">
       <pre>
       {{ form }}
       </pre>
@@ -170,7 +171,21 @@ export default {
     }
   },
   created() {},
-  methods: {}
+  methods: {
+    onFormSubmit() {
+      const params = {
+        businessName: 'string',
+        businessCategory: 0,
+        discountName: 'string',
+        validTill: '2020-10-31T14:37:58.132Z',
+        price: 0
+      }
+
+      this.$axios.$post('/Discount/AddDiscount', params, {
+        progress: true
+      })
+    }
+  }
 }
 </script>
 

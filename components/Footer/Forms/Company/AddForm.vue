@@ -162,7 +162,7 @@
             <div class="control">
               <input
                 id="form-discount_new_price"
-                v-model="form.discount.new_price"
+                v-model="newPrice"
                 disabled
                 class="input"
                 type="text"
@@ -172,7 +172,15 @@
           </div>
         </div>
       </div>
-      <input type="submit" value="Save" @click.prevent="onFormSubmit()">
+
+      <div class="field">
+        <div class="control">
+          <button class="button is-primary" @click.prevent="onFormSubmit()">
+            Save data
+          </button>
+        </div>
+      </div>
+
       <pre style="margin-top: 50px;">
       {{ form }}
       </pre>
@@ -221,6 +229,11 @@ export default {
     }
   },
   created() {},
+  computed: {
+    newPrice() {
+      return parseInt(this.form.discount.price * this.form.discount.percentage)
+    }
+  },
   methods: {
     onFormSubmit() {
       const params = {

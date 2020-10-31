@@ -1,14 +1,20 @@
 <template>
   <div>
-    Discounts
-
-    {{ this.$store.state.discounts.discounts }}
+    <Discount v-for="(item, index) in discounts" :discount="item" :key="index" />
   </div>
 </template>
 
 <script>
+import Discount from '@/components/Discount/Discount'
 export default {
-  components: {},
+  components: {
+    Discount
+  },
+  computed: {
+    discounts() {
+      return this.$store.state.discounts.discounts
+    }
+  },
   created() {
     this.$store.dispatch('discounts/getAllDiscounts')
   }

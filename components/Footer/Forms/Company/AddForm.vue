@@ -54,76 +54,126 @@
             <label for="form-shop_name" class="label">Category</label>
             <p class="control">
               <span class="select" style="width: 100%;">
-                <select style="width: 100%;">
-                  <option selected disabled>Select category</option>
-                  <option v-for="(option, i) in form_data.categories" :value="option.id" :key="i">{{ option.name }}</option>
+                <select v-model="form.shop.category" style="width: 100%;">
+                  <option selected value="0" disabled>Select category</option>
+                  <option v-for="(option, i) in form_data.categories" :key="i" :value="option.id">{{ option.name }}</option>
                 </select>
               </span>
             </p>
           </div>
         </div>
       </div>
-
-      <label for="form-category">
-        <span>Shop category</span>
-        <input id="form-category" v-model="form.shop.category" type="text" name="category">
-      </label>
-
       <h3>Shop Address</h3>
-      <label for="form-address_street">
-        <span>Street</span>
-        <input id="form-address_street" v-model="form.shop.address.street" type="text" name="address_street">
-      </label>
-      <label for="form-address_street">
-        <span>Street number</span>
-        <input id="form-address_street_number" v-model="form.shop.address.street_number" type="text" name="address_street_number">
-      </label>
-      <label for="form-address_street">
-        <span>City</span>
-        <input id="form-address_city" v-model="form.shop.address.city" type="text" name="address_city">
-      </label>
-      <label for="form-address_postal_code">
-        <span>Postal code</span>
-        <input id="form-address_postal_code" v-model="form.shop.address.postal_code" type="text" name="address_postal_code">
-      </label>
+      <div class="columns">
+        <div class="column">
+          <div class="field">
+            <label for="form-shop_address_street" class="label">Street</label>
+            <div class="control">
+              <input id="form-shop_address_street" v-model="form.shop.address.street" class="input" type="text" name="shop_address_street">
+            </div>
+          </div>
+        </div>
+        <div class="column">
+          <div class="field">
+            <label for="form-address_street_number" class="label">Street number</label>
+            <div class="control">
+              <input id="form-address_street_number" v-model="form.shop.address.street_number" class="input" type="text" name="address_street_number">
+            </div>
+          </div>
+        </div>
+      </div>
 
-      <label for="form-address_geo_latitude">
-        <span>Latitude</span>
-        <input id="form-address_geo_latitude" v-model="form.shop.address.geo.lat" type="text" name="address_geo_latitude">
-      </label>
-      <label for="form-address_geo_longitude">
-        <span>Longitude</span>
-        <input id="form-address_geo_longitude" v-model="form.shop.address.geo.lng" type="text" name="address_geo_longitude">
-      </label>
+      <div class="columns">
+        <div class="column">
+          <div class="field">
+            <label for="form-address_city" class="label">City</label>
+            <div class="control">
+              <input id="form-address_city" v-model="form.shop.address.city" class="input" type="text" name="address_city">
+            </div>
+          </div>
+        </div>
+        <div class="column">
+          <div class="field">
+            <label for="form-address_postal_code" class="label">Postal code</label>
+            <div class="control">
+              <input id="form-address_postal_code" v-model="form.shop.address.postal_code" class="input" type="text" name="address_postal_code">
+            </div>
+          </div>
+        </div>
+      </div>
 
-      <h3>Discount</h3>
-      <label for="form-discount_name">
-        <span>Name</span>
-        <input id="form-discount_name" v-model="form.discount.name" type="text" name="discount_name">
-      </label>
+      <div class="columns" style="background: #cdcdcd; border-radius: 20px;padding: 10px; margin-top: 10px; margin-bottom: 10px;">
+        <div class="column">
+          <div class="field">
+            <label for="form-address_geo_latitude" class="label">Latitude</label>
+            <div class="control">
+              <input id="form-address_geo_latitude" v-model="form.shop.address.geo.lat" class="input" type="text" name="address_geo_latitude">
+            </div>
+          </div>
+        </div>
+        <div class="column">
+          <div class="field">
+            <label for="form-address_geo_longitude" class="label">Longitude</label>
+            <div class="control">
+              <input id="form-address_geo_longitude" v-model="form.shop.address.geo.lng" class="input" type="text" name="address_geo_longitude">
+            </div>
+          </div>
+        </div>
+      </div>
 
-      <label for="form-discount_price">
-        <span>Price</span>
-        <input id="form-discount_price" v-model="form.discount.price" type="text" name="discount_price">
-      </label>
-
-      <label for="form-discount_percentage">
-        <span>Percentage</span>
-        <input id="form-discount_percentage" v-model="form.discount.percentage" type="text" name="discount_percentage">
-      </label>
-
-      <label for="form-discount_percentage">
-        <span>New price</span>
-        <input id="form-discount_percentage"  v-model="form.discount.new_price" disabled type="text" name="discount_new_price">
-      </label>
-
-      <label for="form-discount_name">
-        <span>Due date</span>
-        <input id="form-discount_due" v-model="form.discount.due_date" type="text" name="discount_due">
-      </label>
-
-<input type="submit" value="Save" @click.prevent="onFormSubmit()">
-      <pre>
+      <div class="columns">
+        <div class="column">
+          <div class="field">
+            <label for="form-discount_name" class="label">Discount name</label>
+            <div class="control">
+              <input id="form-discount_name" v-model="form.discount.name" class="input" type="text" name="discount_name">
+            </div>
+          </div>
+        </div>
+        <div class="column">
+          <div class="field">
+            <label for="form-discount_due" class="label">Due date</label>
+            <div class="control">
+              <input id="form-discount_due" v-model="form.discount.due_date" class="input" type="text" name="discount_due">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="columns">
+        <div class="column">
+          <div class="field">
+            <label for="form-discount_price" class="label">Price</label>
+            <div class="control">
+              <input id="form-discount_price" v-model="form.discount.price" class="input" type="text" name="discount_price">
+            </div>
+          </div>
+        </div>
+        <div class="column">
+          <div class="field">
+            <label for="form-discount_name" class="label">Percentage</label>
+            <div class="control">
+              <input id="form-discount_name" v-model="form.discount.percentage" class="input" type="text" name="discount_percentage">
+            </div>
+          </div>
+        </div>
+        <div class="column">
+          <div class="field">
+            <label for="form-discount_new_price" class="label">New price</label>
+            <div class="control">
+              <input
+                id="form-discount_new_price"
+                v-model="form.discount.new_price"
+                disabled
+                class="input"
+                type="text"
+                name="discount_new_price"
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+      <input type="submit" value="Save" @click.prevent="onFormSubmit()">
+      <pre style="margin-top: 50px;">
       {{ form }}
       </pre>
     </form>
@@ -149,7 +199,7 @@ export default {
         phone: '',
         shop: {
           name: '',
-          category: null,
+          category: 0,
           address: {
             street: '',
             street_number: '',

@@ -1,0 +1,30 @@
+@import 'fonts';
+
+
+$family-sans-serif: "Arial", sans-serif !default;
+$family-monospace: monospace !default;
+$render-mode: optimizeLegibility !default;
+
+@import "~bulma/sass/utilities/_all";
+@import "~bulma"; 
+
+html {
+  font-family: $family-sans-serif;
+  font-weight: normal;
+  font-style: normal;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  box-sizing: border-box;
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+  margin: 0;
+}

@@ -48,7 +48,7 @@
       <h3>Shop Address</h3>
       <div class="columns">
         <div class="column">
-          <client-only>
+          <no-ssr>
             <vue-google-autocomplete
               id="Address"
               ref="address"
@@ -58,7 +58,7 @@
               country="cs"
               @placechanged="getAddressData"
             />
-          </client-only>
+          </no-ssr>
         </div>
       </div>
 
@@ -291,6 +291,7 @@ export default {
     font-weight: bold;
     margin-bottom: 20px;
   }
+
   h3 {
     font-size: 20px;
     font-weight: bold;
@@ -305,6 +306,7 @@ export default {
     background: #f04c53 !important;
     font-weight: bold;
     text-transform: uppercase;
+
     &:hover {
       opacity: 0.8;
     }

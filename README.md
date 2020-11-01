@@ -1,15 +1,50 @@
 # slevazarohem.cz
+- Discount component for handling discounts from api
+- Vuex store for api data
+- form for create new discount and send it to API server
+
+# Links
+API Server
+http://api.slevazarohem.cz/swagger/index.html
+
+Front End
+http://slevazarohem.cz/
 
 ### Tech
-
 Slevazarohem.cz uses a number of open source projects to work properly:
 
 * [NuxtJS] - SSR Vue.js framework
 * [VueJS] - javascript framework
 * [node.js] - Server side backend
 
-### Installation
-Slevazarohem.cz requires [Node.js](https://nodejs.org/) v11+ to run.
+# Used packages
+- Axios
+- Vuex
+- bulma.io
+- gmap-vue
+- nuxt
+
+# Unfinished
+- Priorization system based on times
+- Receiving Long & Lat from vocie agents and search by geo parameter ( for now harcoded )
+
+# Unfinished
+ - filter discounts by due_date
+ - map marker click popup with details
+ - after click on discount after map - show just only one marker in map
+ - Github CI & UI tests
+ - date due validation if date is in past
+ - Code / Styles polishing and refactor into a small parts
+ 
+
+# How to run it
+``` bash
+# install dependencies
+$ npm install
+
+# serve with hot reload at localhost:3000
+$ npm run dev
+```
 
 ## Build Setup
 
@@ -27,14 +62,3 @@ $ npm start
 # generate static project
 $ npm run generate
 ```
-
-### Features
-- Google Maps Autocomplete implemented for get lat, lng from user input address
-
-### Todos
- - filter discounts by due_date
- - map marker click popup with details
- - after click on discount after map - show just only one marker in map
- - Github CI & UI tests
- - date due validation if date is in past
- - Code / Styles polishing and refactor into a small parts

@@ -305,6 +305,8 @@ export default {
           progress: true
         })
 
+        this.$store.dispatch('discounts/getAllDiscounts')
+
         this.errors = []
         this.okMessage = 'Your discount has been successfully submitted!'
         this.form = {

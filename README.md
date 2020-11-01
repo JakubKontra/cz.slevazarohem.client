@@ -25,14 +25,10 @@ Slevazarohem.cz uses a number of open source projects to work properly:
 - nuxt
 
 # Unfinished
-- Priorization system based on times
-- Receiving Long & Lat from vocie agents and search by geo parameter ( for now harcoded )
-
-# Unfinished
  - filter discounts by due_date
  - map marker click popup with details
  - after click on discount after map - show just only one marker in map
- - Github CI & UI tests
+ - Github CI &
  - date due validation if date is in past
  - Code / Styles polishing and refactor into a small parts
  

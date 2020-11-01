@@ -31,7 +31,7 @@ export default {
 <style lang="scss" scoped>
 .discount {
   background: #ffffff;
-  padding: 20px;
+  margin: 20px;
   border-radius: 5px;
   min-height: 200px;
 

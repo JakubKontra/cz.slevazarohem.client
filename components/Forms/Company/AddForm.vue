@@ -1,9 +1,14 @@
 <template>
   <div class="addForm">
-    <form>
-      <div v-if="errorMessage" class="notification is-danger is-light">
-        <strong>ERROR:</strong> {{ errorMessage }}
-      </div>
+    <form @submit.prevent="onFormSubmit">
+      <p v-if="errors.length" style="margin-bottom: 35px;">
+        <b style="margin-bottom: 20px; text-align: center; display: block;">Please correct the following error(s):</b>
+        <ul>
+          <li v-for="error in errors" :key="error" class="notification is-danger">
+            {{ error }}
+          </li>
+        </ul>
+      </p>
       <div v-if="okMessage" class="notification is-success is-light">
         {{ okMessage }}
       </div>
@@ -20,7 +25,6 @@
                 class="input"
                 type="text"
                 name="shop_name"
-                required
               >
             </div>
           </div>
@@ -30,7 +34,7 @@
             <label for="form-shop_name" class="label">Category</label>
             <p class="control">
               <span class="select" style="width: 100%;">
-                <select v-model="form.shop.category" style="width: 100%;" required>
+                <select v-model="form.shop.category" style="width: 100%;">
                   <option selected value="0" disabled>Select category</option>
                   <option
                     v-for="(option, i) in form_data.categories"
@@ -48,17 +52,19 @@
       <h3>Shop Address</h3>
       <div class="columns">
         <div class="column">
-          <no-ssr>
-            <vue-google-autocomplete
-              id="Address"
-              ref="address"
-              classname="address input"
-              placeholder="Your address, for example Nerudova 1, Praha"
-              types=""
-              country="cs"
-              @placechanged="getAddressData"
-            />
-          </no-ssr>
+          <div class="field">
+            <label for="form-discount_name" class="label">Address</label>
+            <div class="control">
+              <gmap-autocomplete
+                ref="input"
+                class="input"
+                outlined
+                placeholder
+                label="Address"
+                @place_changed="setPlace"
+              />
+            </div>
+          </div>
         </div>
       </div>
 
@@ -73,7 +79,6 @@
                 class="input"
                 type="text"
                 name="discount_name"
-                required
               >
             </div>
           </div>
@@ -88,7 +93,6 @@
                 class="input"
                 type="date"
                 name="discount_due"
-                required
               >
             </div>
           </div>
@@ -105,7 +109,6 @@
                 class="input"
                 type="number"
                 name="discount_price"
-                required
               >
             </div>
           </div>
@@ -113,7 +116,7 @@
       </div>
       <div class="field">
         <div class="control">
-          <button class="button is-primary" @click.prevent="onFormSubmit()">
+          <button class="button is-primary">
             Submit discount
           </button>
         </div>
@@ -122,14 +125,14 @@
   </div>
 </template>
 <script>
+import { gmapApi } from 'vue2-google-maps'
+
 export default {
-  components: {
-    VueGoogleAutocomplete: () => import('vue-google-autocomplete')
-  },
   data() {
     return {
-      errorMessage: '',
+      errors: [],
       okMessage: '',
+      place: {},
       addressData: {
         latitude: 0,
         longitude: 0
@@ -239,10 +242,18 @@ export default {
       }
     }
   },
+  computed: {
+    google: gmapApi
+  },
   created() {
     this.$store.dispatch('discounts/getAllDiscounts')
   },
   methods: {
+    setPlace(place) {
+      this.place = place
+      this.searchFormInputValidate = true
+      /* eslint-disable no-console */
+    },
     getAddressData(addressData, placeResultData, id) {
       this.addressData = addressData
       this.placeResultData = placeResultData
@@ -251,25 +262,68 @@ export default {
     onFormSubmit() {
       /* eslint-disable no-console */
       console.log(this.addressData)
+      this.okMessage = ''
+      this.errors = []
+      if (!this.form.shop.name) {
+        this.errors.push('Shop name is required.')
+      }
 
-      if (this.searchFormInputValidate) {
+      if (!this.form.shop.category) {
+        this.errors.push('Shop category must be selected.')
+      }
+
+      if (!this.form.discount.name) {
+        this.errors.push('Discount name is required.')
+      }
+
+      if (!this.form.discount.due_date) {
+        this.errors.push('Due date is required.')
+      }
+
+      if (!this.form.discount.price) {
+        this.errors.push('Price is required.')
+      }
+
+      if (
+        this.form.shop.name &&
+        this.form.shop.category &&
+        this.form.discount.name &&
+        this.form.discount.due_date &&
+        this.form.discount.price
+      ) {
         const params = {
           businessName: this.form.shop.name,
           businessCategory: this.form.shop.category,
           discountName: this.form.discount.name,
           validTill: this.form.discount.due_date, // '2020-10-31T14:37:58.132Z',
           price: parseFloat(this.form.discount.price),
-          lat: this.addressData.latitude,
-          lng: this.addressData.longitude
+          lat: this.place.geometry.location.lat(),
+          lng: this.place.geometry.location.lng()
         }
 
         this.$axios.$post('/Discount/AddDiscount', params, {
           progress: true
         })
 
-        this.okMessage = 'Discount successfully added. :-)'
-      } else {
-        this.errorMessage = 'No coords set'
+        this.errors = []
+        this.okMessage = 'Your discount has been successfully submitted!'
+        this.form = {
+          shop: {
+            name: '',
+            category: 0,
+            address: {
+              geo: {
+                lat: 0,
+                lng: 0
+              }
+            }
+          },
+          discount: {
+            name: '',
+            price: 0,
+            due_date: null
+          }
+        }
       }
     }
   }

@@ -120,8 +120,8 @@ module.exports = {
         }
       }
     },
-
-    transpile: [/^vue2-google-maps($|\/)/, 'vue-google-autocomplete'],
+    vendor: ['gmap-vue'],
+    transpile: [/^gmap-vue($|\/)/, /^vue2-google-maps($|\/)/, /^vue2-gmap-custom-marker($|\/)/],
 
     /*
     ** You can extend webpack config here

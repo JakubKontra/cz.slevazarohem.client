@@ -13,5 +13,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '/../node_modules/bulma/sass/utilities/mixins';
+footer {
+  max-width: 960px;
+  margin: 0 auto;
+  color: #fff;
+  padding-bottom: 20px;
+}
 </style>

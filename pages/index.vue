@@ -1,31 +1,66 @@
 <template>
   <div>
-    <img src="/logo.png" width="250" height="250">
-    <div class="map">
-      <GmapMap
-        :center="{ lat:10, lng:10 }"
-        :zoom="7"
-        :options="mapStyle"
-        map-type-id="terrain"
-        style="width: 100%; height: 500px"
-      >
-        <GmapMarker
-          v-for="(m, index) in discounts"
-          :key="index"
-          :position="m.position"
-        />
-      </GmapMap>
+    <div class="header">
+      <img src="/logo-2.png" width="250" height="250">
+      <h1>Get your discounts <br> to right to the customer’s room <br> via <span class="primary-color">voice assistant.</span></h1>
+    </div>
+    
+    <div class="icon-boxes">
+      <div class="columns">
+        <div class="column">
+          <div class="icon-box">
+            <span class="icon-box__number">01</span>
+            <h3>Register your discounts.</h3>
+            <p>Add a company name, product / services, the name of discount and amount, deadline of usage of the discount</p>
+          </div>
+        </div>
+        <div class="column">
+          <div class="icon-box">
+            <span class="icon-box__number">02</span>
+            <h3>Set up the right location.</h3>
+            <p>To enable locals to be informed about your discount, the setup of the location is required. </p>
+          </div>
+        </div>
+        <div class="column">
+          <div class="icon-box">
+            <span class="icon-box__number">03</span>
+            <h3>Get new clients!</h3>
+            <p> Let your locals know about you and support you.</p>
+          </div>
+        </div>
+      </div>
     </div>
     <add-form />
+    <div class="map">
+      <client-only>
+        <GmapMap
+          :key="1"
+          :center="{ lat:50.0718019, lng:14.4671262 }"
+          :zoom="7"
+          :options="mapStyle"
+          map-type-id="terrain"
+          style="width: 100%; height: 750px"
+        >
+          <GmapMarker
+            v-for="(m, index) in discounts"
+            :key="index"
+            :position="{ lat: m.lat, lng: m.lng }"
+            :icon="{ url: require('../static/map-pin.svg') }"
+          />
+        </GmapMap>
+      </client-only>
+    </div>
+    <Footer />
   </div>
 </template>
 
 <script>
 import AddForm from '@/components/Forms/Company/AddForm'
-
+import Footer from '@/components/Footer/Footer'
 export default {
   components: {
-    AddForm
+    AddForm,
+    Footer
   },
   data() {
     return {
@@ -208,9 +243,56 @@ export default {
   }
 }
 </script>
-<style>
+<style lang="scss" scoped>
 .map {
-  max-width: 960px;
+  width: 100%;
   margin: 0 auto;
+  margin-top: 55px;
+  margin-bottom: 55px;
+}
+.header {
+  width: 100%;
+  text-align: center;
+  h1 {
+    font-weight: bold;
+    font-size: 72px;
+    text-align: center;
+    color: #fff;
+  }
+}
+.primary-color {
+  color: #f04c53;
+  text-decoration: underline;
+}
+.icon-boxes {
+  max-width: 1140px;
+  margin: 0 auto;
+  margin-top: 85px;
+  margin-bottom: 85px;
+}
+
+.icon-box {
+  padding: 20px;
+  position: relative;
+  h3 {
+    font-weight: bold;
+    font-size: 24px;
+    margin-bottom: 20px;
+    z-index: 20;
+    background: #01002e;
+  }
+
+  p {
+    color: #fff;
+  }
+}
+.icon-box__number {
+  position: absolute;
+  font-size: 55px;
+  color: #fff;
+  font-weight: bold;
+  opacity: 0.2;
+  top: -30px;
+  left: -25px;
 }
 </style>

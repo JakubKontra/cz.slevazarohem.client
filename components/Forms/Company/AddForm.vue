@@ -1,13 +1,24 @@
 <template>
   <div class="addForm">
     <form>
+      <div class="notification is-danger is-light" v-if="this.errorMessage">
+       <strong>ERROR:</strong> {{ this.errorMessage }}
+      </div>
+      <h2>Add your discount</h2>
       <h3>Shop information</h3>
       <div class="columns">
         <div class="column">
           <div class="field">
             <label for="form-shop_name" class="label">Shop name</label>
             <div class="control">
-              <input id="form-shop_name" v-model="form.shop.name" class="input" type="text" name="shop_name">
+              <input
+                id="form-shop_name"
+                v-model="form.shop.name"
+                class="input"
+                type="text"
+                name="shop_name"
+                required
+              >
             </div>
           </div>
         </div>
@@ -16,7 +27,7 @@
             <label for="form-shop_name" class="label">Category</label>
             <p class="control">
               <span class="select" style="width: 100%;">
-                <select v-model="form.shop.category" style="width: 100%;">
+                <select v-model="form.shop.category" style="width: 100%;" required>
                   <option selected value="0" disabled>Select category</option>
                   <option
                     v-for="(option, i) in form_data.categories"
@@ -38,7 +49,7 @@
             <vue-google-autocomplete
               id="Address"
               ref="address"
-              classname="address pl-5"
+              classname="address input"
               placeholder="Vaše adresa, např. Nerudova 1, Praha"
               types=""
               country="cz"
@@ -59,6 +70,7 @@
                 class="input"
                 type="text"
                 name="discount_name"
+                required
               >
             </div>
           </div>
@@ -71,8 +83,9 @@
                 id="form-discount_due"
                 v-model="form.discount.due_date"
                 class="input"
-                type="text"
+                type="date"
                 name="discount_due"
+                required
               >
             </div>
           </div>
@@ -87,8 +100,9 @@
                 id="form-discount_price"
                 v-model="form.discount.price"
                 class="input"
-                type="text"
+                type="number"
                 name="discount_price"
+                required
               >
             </div>
           </div>
@@ -111,9 +125,13 @@ export default {
   },
   data() {
     return {
-      addressData: null,
+      errorMessage: '',
+      addressData: {
+        latitude: 0,
+        longitude: 0
+      },
       placeResultData: null,
-      searchFormInputValidate: null,
+      searchFormInputValidate: false,
       form_data: {
         categories: [
           {
@@ -150,22 +168,27 @@ export default {
       this.placeResultData = placeResultData
       this.searchFormInputValidate = true
     },
-    doSearch() {
+    onFormSubmit() {
       /* eslint-disable no-console */
       console.log(this.addressData)
-    },
-    onFormSubmit() {
-      const params = {
-        businessName: 'string',
-        businessCategory: 0,
-        discountName: 'string',
-        validTill: '2020-10-31T14:37:58.132Z',
-        price: 0
-      }
 
-      this.$axios.$post('/Discount/AddDiscount', params, {
-        progress: true
-      })
+      if (this.searchFormInputValidate) {
+        const params = {
+          businessName: this.form.shop.name,
+          businessCategory: this.form.shop.category,
+          discountName: this.form.discount.name,
+          validTill: this.form.discount.due_date, // '2020-10-31T14:37:58.132Z',
+          price: parseFloat(this.form.discount.price),
+          lat: this.addressData.latitude,
+          lng: this.addressData.longitude
+        }
+
+        this.$axios.$post('/Discount/AddDiscount', params, {
+          progress: true
+        })
+      } else {
+        this.errorMessage = 'No coords set'
+      }
     }
   }
 }
@@ -173,12 +196,33 @@ export default {
 
 <style lang="scss" scoped>
 .addForm {
-  max-width: 960px;
+  max-width: 540px;
   margin: 0 auto;
+  background: #fff;
+  padding: 35px;
+  border-radius: 15px;
 
+  h2 {
+    font-size: 32px;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
   h3 {
     font-size: 20px;
     font-weight: bold;
+    margin-bottom: 20px;
+  }
+
+  button.is-primary {
+    width: 100%;
+    height: auto !important;
+    padding-top: 15px !important;
+    padding-bottom: 15px !important;
+    &:hover {
+      opacity: 0.8;
+    }
   }
 }
 </style>

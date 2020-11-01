@@ -16,29 +16,29 @@ module.exports = {
       {
         hid: 'description',
         name: 'description',
-        content: ''
+        content: 'we care about small businesses  #supportlocalbusiness'
       },
       {
         hid: 'keywords',
         name: 'keywords',
         content:
-          ''
+          'we voice about small businesses'
       },
       { hid: 'author', name: 'author', content: 'Siesta.Hackers' },
       {
         hid: 'og:site_name',
         name: 'og:site_name',
-        content: ''
+        content: 'slevazarohem.cz | we voice about small businesses'
       },
       {
         hid: 'og:description',
         name: 'og:description',
-        content: ''
+        content: 'we voice about small businesses'
       },
       {
         hid: 'og:title',
         name: 'og:title',
-        content: ''
+        content: 'slevazarohem.cz | we voice about small businesses'
       },
       { hid: 'og:type', name: 'og:type', content: 'website' },
       {
@@ -47,6 +47,7 @@ module.exports = {
         content: 'images/og_image.png'
       }
     ],
+    script: [{ src: "https://maps.googleapis.com/maps/api/js?key=AIzaSyARflUJ3YxPkG4Iwj3H5WPoAsAcvoZEkHs&libraries=places "}],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
   },
 

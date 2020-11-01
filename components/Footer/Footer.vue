@@ -1,6 +1,6 @@
 <template>
   <footer>
-      <p>Footer</p>
+      <p>&copy; Siesta Hackers 2020 | slevazarohem.cz - we care about small businesses  #supportlocalbusiness</p>
   </footer>
 </template>
 
@@ -14,9 +14,10 @@ export default {
 
 <style lang="scss" scoped>
 footer {
+  text-align: center;
   max-width: 960px;
   margin: 0 auto;
   color: #fff;
-  padding-bottom: 20px;
+  padding-bottom: 50px;
 }
 </style>

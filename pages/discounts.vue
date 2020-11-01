@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Discount v-for="(item, index) in discounts" :discount="item" :key="index" />
+    <Discount v-for="(item, index) in discounts" :key="index" :discount="item" />
   </div>
 </template>
 

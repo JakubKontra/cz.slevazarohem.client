@@ -1,10 +1,10 @@
 <template>
   <div>
     <div class="header">
-      <img src="/logo-2.png" width="250" height="250">
+      <img src="/logo-2.png" width="500" height="500">
       <h1>Get your discounts <br> to right to the customer’s room <br> via <span class="primary-color">voice assistant.</span></h1>
     </div>
-    
+
     <div class="icon-boxes">
       <div class="columns">
         <div class="column">
@@ -50,6 +50,15 @@
         </GmapMap>
       </client-only>
     </div>
+
+    <div class="discounts">
+      <h2>Submitted discounts</h2>
+      <div class="columns is-multiline">
+        <div v-for="(item, index) in discounts" :key="index" class="column is-4">
+          <Discount :discount="item" />
+        </div>
+      </div>
+    </div>
     <Footer />
   </div>
 </template>
@@ -57,10 +66,12 @@
 <script>
 import AddForm from '@/components/Forms/Company/AddForm'
 import Footer from '@/components/Footer/Footer'
+import Discount from '@/components/Discount/Discount'
 export default {
   components: {
     AddForm,
-    Footer
+    Footer,
+    Discount
   },
   data() {
     return {
@@ -294,5 +305,19 @@ export default {
   opacity: 0.2;
   top: -30px;
   left: -25px;
+}
+
+.discounts {
+  display: block;
+  padding-bottom: 55px;
+  h2 {
+    text-align: center;
+    font-size: 32px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+  max-width: 960px;
+  margin: 0 auto;
 }
 </style>

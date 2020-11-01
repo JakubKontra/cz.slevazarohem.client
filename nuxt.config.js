@@ -21,8 +21,7 @@ module.exports = {
       {
         hid: 'keywords',
         name: 'keywords',
-        content:
-          'we voice about small businesses'
+        content: 'we voice about small businesses'
       },
       { hid: 'author', name: 'author', content: 'Siesta.Hackers' },
       {
@@ -47,7 +46,12 @@ module.exports = {
         content: 'images/og_image.png'
       }
     ],
-    script: [{ src: "https://maps.googleapis.com/maps/api/js?key=AIzaSyARflUJ3YxPkG4Iwj3H5WPoAsAcvoZEkHs&libraries=places "}],
+    script: [
+      {
+        src:
+          'https://maps.googleapis.com/maps/api/js?key=AIzaSyARflUJ3YxPkG4Iwj3H5WPoAsAcvoZEkHs&libraries=places '
+      }
+    ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
   },
 
@@ -72,7 +76,7 @@ module.exports = {
       ssr: false
     },
     {
-      src: "@/plugins/google-maps",
+      src: '@/plugins/google-maps',
       ssr: true
     }
   ],
@@ -102,7 +106,7 @@ module.exports = {
   */
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
-    baseURL: 'http://api.slevazarohem.cz/',
+    baseURL: 'http://api.slevazarohem.cz/'
   },
 
   /*

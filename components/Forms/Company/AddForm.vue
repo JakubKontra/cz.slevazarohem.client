@@ -1,8 +1,11 @@
 <template>
   <div class="addForm">
     <form>
-      <div class="notification is-danger is-light" v-if="this.errorMessage">
-       <strong>ERROR:</strong> {{ this.errorMessage }}
+      <div v-if="errorMessage" class="notification is-danger is-light">
+        <strong>ERROR:</strong> {{ errorMessage }}
+      </div>
+      <div v-if="okMessage" class="notification is-success is-light">
+        {{ okMessage }}
       </div>
       <h2>Add your discount</h2>
       <h3>Shop information</h3>
@@ -50,9 +53,9 @@
               id="Address"
               ref="address"
               classname="address input"
-              placeholder="Vaše adresa, např. Nerudova 1, Praha"
+              placeholder="Your address, for example Nerudova 1, Praha"
               types=""
-              country="cz"
+              country="cs"
               @placechanged="getAddressData"
             />
           </client-only>
@@ -94,7 +97,7 @@
       <div class="columns">
         <div class="column">
           <div class="field">
-            <label for="form-discount_price" class="label">Price</label>
+            <label for="form-discount_price" class="label">Price (CZK)</label>
             <div class="control">
               <input
                 id="form-discount_price"
@@ -111,7 +114,7 @@
       <div class="field">
         <div class="control">
           <button class="button is-primary" @click.prevent="onFormSubmit()">
-            Save data
+            Submit discount
           </button>
         </div>
       </div>
@@ -126,6 +129,7 @@ export default {
   data() {
     return {
       errorMessage: '',
+      okMessage: '',
       addressData: {
         latitude: 0,
         longitude: 0
@@ -136,7 +140,83 @@ export default {
         categories: [
           {
             id: 1,
-            name: 'Bakery'
+            name: 'Arts & Entertainment'
+          },
+          {
+            id: 2,
+            name: 'Arts & Marketing'
+          },
+          {
+            id: 3,
+            name: 'Automotive'
+          },
+          {
+            id: 4,
+            name: 'Business Services'
+          },
+          {
+            id: 5,
+            name: 'Cafe'
+          },
+          {
+            id: 6,
+            name: 'Clothing Store'
+          },
+          {
+            id: 7,
+            name: 'Commercial & Industrial'
+          },
+          {
+            id: 8,
+            name: 'Community & Government'
+          },
+          {
+            id: 9,
+            name: 'Education'
+          },
+          {
+            id: 10,
+            name: 'Food & Grocery'
+          },
+          {
+            id: 11,
+            name: 'Food & Restaurant'
+          },
+          {
+            id: 12,
+            name: 'Home Improvement'
+          },
+          {
+            id: 13,
+            name: 'Lifestyle Services'
+          },
+          {
+            id: 14,
+            name: 'LifestyMedical & Health'
+          },
+          {
+            id: 15,
+            name: 'Private Transportation'
+          },
+          {
+            id: 16,
+            name: 'Professional Services'
+          },
+          {
+            id: 17,
+            name: 'Restaurant'
+          },
+          {
+            id: 18,
+            name: 'Shopping & Retail'
+          },
+          {
+            id: 19,
+            name: 'Spa, Beauty & Personal Care'
+          },
+          {
+            id: 20,
+            name: 'Sports & Recreation'
           }
         ]
       },
@@ -186,6 +266,8 @@ export default {
         this.$axios.$post('/Discount/AddDiscount', params, {
           progress: true
         })
+
+        this.okMessage = 'Discount successfully added. :-)'
       } else {
         this.errorMessage = 'No coords set'
       }
@@ -220,6 +302,9 @@ export default {
     height: auto !important;
     padding-top: 15px !important;
     padding-bottom: 15px !important;
+    background: #f04c53 !important;
+    font-weight: bold;
+    text-transform: uppercase;
     &:hover {
       opacity: 0.8;
     }

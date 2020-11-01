@@ -1,6 +1,6 @@
 <template>
   <footer>
-      <p>&copy; Siesta Hackers 2020 | slevazarohem.cz - we care about small businesses  #supportlocalbusiness</p>
+    <p>&copy; Siesta Hackers 2020 | slevazarohem.cz - we care about small businesses  #supportlocalbusiness</p>
   </footer>
 </template>
 

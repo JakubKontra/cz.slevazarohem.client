@@ -28,9 +28,13 @@ $ npm start
 $ npm run generate
 ```
 
+### Features
+- Google Maps Autocomplete implemented for get lat, lng from user input address
+
 ### Todos
  - filter discounts by due_date
  - map marker click popup with details
  - after click on discount after map - show just only one marker in map
  - Github CI & UI tests
+ - date due validation if date is in past
  - Code / Styles polishing and refactor into a small parts

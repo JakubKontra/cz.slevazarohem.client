@@ -32,3 +32,5 @@ $ npm run generate
  - filter discounts by due_date
  - map marker click popup with details
  - after click on discount after map - show just only one marker in map
+ - Github CI & UI tests
+ - Code / Styles polishing and refactor into a small parts
